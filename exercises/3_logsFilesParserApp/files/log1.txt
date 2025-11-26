@@ -1,0 +1,5 @@
+[2024-04-21 20:05:01] INFO: User logged in: user_id=123
+[2024-04-21 20:06:07] ERROR: DB connection failed
+[2024-04-21 20:07:22] INFO: User logged in: user_id=456
+[2024-04-21 20:08:44] INFO: User logged in: user_id=123
+[2024-04-21 20:09:11] ERROR: Timeout
