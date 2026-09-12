@@ -26,11 +26,38 @@ import "fmt"
 // 0 <= s.length <= 5 * 104
 // s consists of English letters, digits, symbols and spaces.
 func main() {
-	fmt.Println(lengthOfLongestSubstring("abcabcbb"))
+	fmt.Println(lengthOfLongestStringBruteForce("abcabcbb"))
 	fmt.Println(lengthOfLongestSubstring("bbbbb"))
 	fmt.Println(lengthOfLongestSubstring("pwwkew"))
 }
 
+// Time: O(n³) Space Complexity: O(n)
+func lengthOfLongestStringBruteForce(s string) int {
+	runes := []rune(s)
+	longestString := 0
+	isUniqueSubstring := func(runes []rune, start int, end int) bool {
+		checkedChars := make(map[rune]struct{})
+		for i := start; i <= end; i++ {
+			if _, ok := checkedChars[runes[i]]; ok {
+				return false
+			}
+			checkedChars[runes[i]] = struct{}{}
+		}
+		return true
+	}
+	for i := 0; i < len(runes); i++ {
+		for j := i; j < len(runes); j++ {
+			if isUniqueSubstring(runes, i, j) {
+				if longestString < j-i+1 {
+					longestString = j - i + 1
+				}
+			}
+		}
+	}
+	return longestString
+}
+
+// Time: O(n) Space Complexity: O(n)
 func lengthOfLongestSubstring(s string) int {
 	runes := []rune(s)
 	lastRune := make(map[rune]int)
