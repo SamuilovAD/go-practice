@@ -3,6 +3,9 @@ package main
 import "fmt"
 
 /*
+The count stores: who is directly connected to whom.
+The DSU stores: who eventually belongs to the same related group.
+
 Union-find Constructor: Time O(N)
 Find: Time O(1)
 Union: Time O(N)
