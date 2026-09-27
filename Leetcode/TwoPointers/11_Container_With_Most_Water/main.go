@@ -7,7 +7,7 @@ func main() {
 	fmt.Printf("Max area for this set: %v, is %v", area, maxAreaTwoPointers(area))
 }
 
-//Time: O(n), Space: O(1)
+// Time: O(n), Space: O(1)
 func maxAreaTwoPointers(heightList []int) int {
 	maxArea := 0
 	leftIndex := 0
