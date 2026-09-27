@@ -4,6 +4,12 @@ import "fmt"
 
 func main() {
 	slice := []int{5, 4, 1, 2, 6, 8, 3, 3}
+	selectionSort(slice)
+	fmt.Printf("Counting sort: %v \n", slice)
+	slice = []int{5, 4, 1, 2, 6, 8, 3, 3}
+	selectionSort(slice)
+	fmt.Printf("Selection sort: %v \n", slice)
+	slice = []int{5, 4, 1, 2, 6, 8, 3, 3}
 	insertionSort(slice)
 	fmt.Printf("Insertion sort: %v \n", slice)
 	slice = []int{5, 4, 1, 2, 6, 8, 3, 3}
@@ -37,5 +43,47 @@ func insertionSort(nums []int) {
 			j--
 		}
 		nums[j+1] = current
+	}
+}
+
+// Time: O(n²), Space: (1)
+func selectionSort(nums []int) {
+	for i := 0; i < len(nums); i++ {
+		minIndex := i
+		for j := i + 1; j < len(nums); j++ {
+			if nums[j] < nums[minIndex] {
+				minIndex = j
+			}
+		}
+		nums[i], nums[minIndex] = nums[minIndex], nums[i]
+	}
+}
+
+// Time: O(n+k), Space: (k) k = maxValue - minValue + 1
+func countingSort(nums []int) {
+	if len(nums) == 0 {
+		return
+	}
+	minValue := nums[0]
+	maxValue := nums[0]
+	for _, val := range nums {
+		if minValue > val {
+			minValue = val
+		}
+		if maxValue < val {
+			maxValue = val
+		}
+	}
+	counts := make([]int, maxValue-minValue-1)
+	for _, val := range nums {
+		counts[val-minValue]++
+	}
+	index := 0
+	for value, count := range counts {
+		for count > 0 {
+			nums[index] = value + minValue
+			index++
+			count--
+		}
 	}
 }
