@@ -4,6 +4,9 @@ import "fmt"
 
 func main() {
 	slice := []int{5, 4, 1, 2, 6, 8, 3, 3}
+	insertionSort(slice)
+	fmt.Printf("Insertion sort: %v \n", slice)
+	slice = []int{5, 4, 1, 2, 6, 8, 3, 3}
 	bubbleSort(slice)
 	fmt.Printf("Bubble sort: %v", slice)
 }
@@ -21,5 +24,18 @@ func bubbleSort(nums []int) {
 		if !swapped {
 			break
 		}
+	}
+}
+
+// Time: O(n²), Space: (1)
+func insertionSort(nums []int) {
+	for i := 1; i < len(nums); i++ {
+		current := nums[i]
+		j := i - 1
+		for j >= 0 && nums[j] > current {
+			nums[j+1] = nums[j]
+			j--
+		}
+		nums[j+1] = current
 	}
 }
