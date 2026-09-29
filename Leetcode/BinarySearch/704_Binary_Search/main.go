@@ -7,6 +7,8 @@ func main() {
 	fmt.Println(search(nums, 9))
 	fmt.Println(search(nums, 14))
 }
+
+// Time: O(log N) Space: O(1)
 func search(nums []int, target int) int {
 	if len(nums) == 0 {
 		return 0
