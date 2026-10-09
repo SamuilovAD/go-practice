@@ -3,8 +3,8 @@ package main
 import "fmt"
 
 func main() {
-	slice := []int{5, 4, 1, 2, 6, 8, 3, 3}
-	selectionSort(slice)
+	slice := []int{4, -2, 2, -2, 3, 6, 8, 3, 3}
+	countingSort(slice)
 	fmt.Printf("Counting sort: %v \n", slice)
 	slice = []int{5, 4, 1, 2, 6, 8, 3, 3}
 	selectionSort(slice)
@@ -61,7 +61,7 @@ func selectionSort(nums []int) {
 
 // Time: O(n+k), Space: (k) k = maxValue - minValue + 1
 func countingSort(nums []int) {
-	if len(nums) == 0 {
+	if len(nums) <= 1 {
 		return
 	}
 	minValue := nums[0]
@@ -74,7 +74,7 @@ func countingSort(nums []int) {
 			maxValue = val
 		}
 	}
-	counts := make([]int, maxValue-minValue-1)
+	counts := make([]int, maxValue-minValue+1)
 	for _, val := range nums {
 		counts[val-minValue]++
 	}
