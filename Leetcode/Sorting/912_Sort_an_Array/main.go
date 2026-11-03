@@ -1,9 +1,15 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
 func main() {
 	slice := []int{4, -2, 2, -2, 3, 6, 8, 3, 3}
+	bucketSort(slice)
+	fmt.Printf("Bucket sort: %v \n", slice)
+	slice = []int{4, -2, 2, -2, 3, 6, 8, 3, 3}
 	countingSort(slice)
 	fmt.Printf("Counting sort: %v \n", slice)
 	slice = []int{5, 4, 1, 2, 6, 8, 3, 3}
@@ -85,5 +91,32 @@ func countingSort(nums []int) {
 			index++
 			count--
 		}
+	}
+}
+
+func bucketSort(nums []int) {
+	if len(nums) < 2 {
+		return
+	}
+	minVal, maxVal := nums[0], nums[0]
+	for _, num := range nums[1:] {
+		if num < minVal {
+			minVal = num
+		}
+		if num > maxVal {
+			maxVal = num
+		}
+	}
+	sizeOfBucket := 10
+	numberOfBuckets := (maxVal-minVal)/sizeOfBucket + 1
+	buckets := make([][]int, numberOfBuckets)
+	for _, num := range nums {
+		bucketIdx := (num - minVal) / sizeOfBucket
+		buckets[bucketIdx] = append(buckets[bucketIdx], num)
+	}
+	pos := 0
+	for _, bucket := range buckets {
+		sort.Ints(bucket)
+		pos += copy(nums[pos:], bucket)
 	}
 }
